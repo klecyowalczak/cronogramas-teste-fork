@@ -93,12 +93,12 @@ export class TurmaService {
     return turma
   }
 
-  async delete({ id_turma }: findOneTurmaRequest): Promise<Turma | Error> {
+  async delete({ id_turma }: findOneTurmaRequest): Promise<string | Error> {
     const turma = await cursor.findOne({ where: { id_turma } })
     if (!turma) {
       return new Error("Turma não encontrada!")
     }
     await cursor.delete(turma.id_turma)
-    return turma
+    return "Turma deletada com sucesso!"
   }
 }

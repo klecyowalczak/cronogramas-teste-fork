@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import CursoService from "../services/serviceCurso"
+import { CursoService } from "../services/serviceCurso"
 
 const service = new CursoService()
 
