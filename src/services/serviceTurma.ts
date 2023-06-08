@@ -74,7 +74,7 @@ export class TurmaService {
   }: updateTurmaRequest): Promise<Turma | Error> {
     const turma = await cursor.findOne({ where: { id_turma } })
     if (!turma) {
-      return new Error("Cliente não encontrado!")
+      return new Error("Turma não encontrada!")
     }
 
     turma.id_turma = id_turma
@@ -93,7 +93,7 @@ export class TurmaService {
   async delete({ id_turma }: findOneTurmaRequest): Promise<Turma | Error> {
     const turma = await cursor.findOne({ where: { id_turma } })
     if (!turma) {
-      return new Error("Turma não encontrado!")
+      return new Error("Turma não encontrada!")
     }
     await cursor.delete(turma.id_turma)
     return turma
