@@ -45,8 +45,8 @@ export class RecessoService {
   }
 
   async readAll() {
-    const recesso = await cursor.find()
-    return recesso
+    const recessos = await cursor.find()
+    return recessos
   }
 
   async readOne({ id_recesso }: findOneRecessoRequest): Promise<Recesso | Error> {
