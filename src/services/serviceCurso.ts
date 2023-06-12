@@ -90,12 +90,13 @@ export class CursoService {
     return curso
   }
 
-  async delete({ id_curso }: findOneCursoRequest): Promise<Curso | Error> {
+  async delete({ id_curso }: findOneCursoRequest): Promise<String | Error> {
     const curso = await cursor.findOne({ where: { id_curso } })
     if (!curso) {
       return new Error("Curso não encontrado!")
     }
     await cursor.delete(curso.id_curso)
-    return curso
+    return "Curso excluído com sucesso!"
   }
+
 }
