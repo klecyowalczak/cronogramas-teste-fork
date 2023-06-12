@@ -1,4 +1,4 @@
-import { AppDataSource } from "../databases/connections/data-source"
+import { AppDataSource } from "../databases/connections/datasourceDev"
 import Unidade from "../databases/models/unidade"
 
 // 1) Estabelece conexão com a tabela alvo no banco de dados através de um cursor
