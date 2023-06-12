@@ -1,4 +1,4 @@
-import { AppDataSource } from "../databases/connections/data-source"
+import { AppDataSource } from "../databases/connections/datasourceDev"
 import Aula from "../databases/models/aula"
 
 const cursor = AppDataSource.getRepository(Aula)
