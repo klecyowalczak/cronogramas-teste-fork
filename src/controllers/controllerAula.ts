@@ -5,11 +5,10 @@ const service = new AulaService()
 
 export default class AulaController {
     async create(request: Request, response: Response) {
-      const { id_aula, data_aula, status_aula, fk_turma, fk_unidade } =
+      const { data_aula, status_aula, fk_turma, fk_unidade } =
         request.body
   
       const result = await service.create({
-        id_aula,
         data_aula,
         status_aula,
         fk_turma,

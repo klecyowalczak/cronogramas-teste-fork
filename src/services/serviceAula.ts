@@ -4,7 +4,6 @@ import Aula from "../databases/models/aula"
 const cursor = AppDataSource.getRepository(Aula)
 
 type newAulaRequest = {
-    id_aula: string
     data_aula: Date
     status_aula: string
     fk_turma: string
@@ -25,16 +24,14 @@ type findOneAulaRequest = {
 
 export class AulaService {
     async create({
-        id_aula,
         data_aula,
         status_aula,
     }: newAulaRequest): Promise<Aula | Error> {
-      if (await cursor.findOne({ where: { id_aula } })) {
+      if (await cursor.findOne({ where: { data_aula, status_aula } })) {
         return new Error("Aula já cadastrada!")
       }
   
       const aula = cursor.create({
-        id_aula,
         data_aula,
         status_aula,
       })
