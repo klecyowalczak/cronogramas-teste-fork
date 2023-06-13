@@ -9,6 +9,7 @@ const cursor = AppDataSource.getRepository(Turma)
 
 type newTurmaRequest = {
     fk_curso: string
+    turno: string
     data_inicio: Date
     data_fim: Date
     horas_aula_dia: Number
@@ -17,6 +18,7 @@ type newTurmaRequest = {
 type updateTurmaRequest = {
     id_turma: string
     fk_curso: string
+    turno: string
     data_inicio: Date
     data_fim: Date
     horas_aula_dia: Number
@@ -32,6 +34,7 @@ export class TurmaService {
     
   async create({
     fk_curso,
+    turno,
     data_inicio,
     data_fim,
     horas_aula_dia,
@@ -41,6 +44,7 @@ export class TurmaService {
     }
 
     const turma = cursor.create({
+        turno,
         data_inicio,
         data_fim,
         horas_aula_dia,
@@ -68,6 +72,7 @@ export class TurmaService {
   async update({
     id_turma,
     fk_curso,
+    turno,
     data_inicio,
     data_fim,
     horas_aula_dia,
@@ -82,7 +87,10 @@ export class TurmaService {
     : turma.id_turma
     turma.fk_curso = fk_curso
     ? fk_curso
-    : turma.id_turma
+    : turma.fk_curso
+    turma.turno = turno
+    ? turno
+    : turma.turno
     turma.data_inicio = data_inicio
     ? data_inicio
     : turma.data_inicio
