@@ -31,8 +31,8 @@ export default class CursoController {
   }
 
   async readOne(request: Request, response: Response) {
-    const { id_turma } = request.params
-    const result = await service.readOne({ id_turma })
+    const { id_turma, turno } = request.params
+    const result = await service.readOne({ id_turma, turno })
     if (result instanceof Error) {
       return response.status(404).json(result.message)
     }
@@ -58,8 +58,8 @@ export default class CursoController {
   }
 
   async delete(request: Request, response: Response) {
-    const { id_turma } = request.params
-    const result = await service.delete({ id_turma })
+    const { id_turma, turno } = request.params
+    const result = await service.delete({ id_turma, turno })
     if (result instanceof Error) {
       return response.status(400).json(result.message)
     }

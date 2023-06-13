@@ -26,6 +26,7 @@ type updateTurmaRequest = {
 
 type findOneTurmaRequest = {
     id_turma: string
+    turno: string
 }
 
 // 3) Funções CRUD
@@ -61,8 +62,8 @@ export class TurmaService {
     return turma
   }
 
-  async readOne({ id_turma }: findOneTurmaRequest): Promise<Turma | Error> {
-    const turma = await cursor.findOne({ where: { id_turma } })
+  async readOne({ id_turma, turno }: findOneTurmaRequest): Promise<Turma | Error> {
+    const turma = await cursor.findOne({ where: { id_turma, turno } })
     if (!turma) {
       return new Error("Turma não encontrada!")
     }

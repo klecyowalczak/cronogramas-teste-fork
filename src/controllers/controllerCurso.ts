@@ -30,8 +30,8 @@ export default class CursoController {
   }
 
   async readOne(request: Request, response: Response) {
-    const { id_curso } = request.params
-    const result = await service.readOne({ id_curso })
+    const { id_curso, modalidade, eixo } = request.params
+    const result = await service.readOne({ id_curso, modalidade, eixo })
     if (result instanceof Error) {
       return response.status(404).json(result.message)
     }
@@ -56,8 +56,8 @@ export default class CursoController {
   }
 
   async delete(request: Request, response: Response) {
-    const { id_curso } = request.params
-    const result = await service.delete({ id_curso })
+    const { id_curso, modalidade, eixo } = request.params
+    const result = await service.delete({ id_curso, modalidade, eixo })
     if (result instanceof Error) {
       return response.status(400).json(result.message)
     }

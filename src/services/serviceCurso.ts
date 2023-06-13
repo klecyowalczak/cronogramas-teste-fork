@@ -24,6 +24,8 @@ type updateCursoRequest = {
 
 type findOneCursoRequest = {
   id_curso: string
+  modalidade: string
+  eixo: string
 }
 
 // 3) Funções CRUD
@@ -56,8 +58,8 @@ export class CursoService {
     return cursos
   }
 
-  async readOne({ id_curso }: findOneCursoRequest): Promise<Curso | Error> {
-    const curso = await cursor.findOne({ where: { id_curso } })
+  async readOne({ id_curso, modalidade, eixo }: findOneCursoRequest): Promise<Curso | Error> {
+    const curso = await cursor.findOne({ where: { id_curso, modalidade, eixo } })
     if (!curso) {
       return new Error("Curso não encontrado!")
     }
