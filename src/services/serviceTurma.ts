@@ -1,4 +1,4 @@
-import { AppDataSource } from "../databases/connections/data-source"
+import { AppDataSource } from "../databases/connections/datasourceDev"
 import Turma from "../databases/models/turma"
 
 // 1) Estabelece conexão com a tabela alvo no banco de dados através de um cursor
