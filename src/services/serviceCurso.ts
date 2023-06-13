@@ -1,4 +1,4 @@
-import { AppDataSource } from "../databases/connections/data-source"
+import { AppDataSource } from "../databases/connections/datasourceDev"
 import Curso from "../databases/models/curso"
 
 // 1) Estabelece conexão com a tabela alvo no banco de dados através de um cursor
@@ -98,5 +98,4 @@ export class CursoService {
     await cursor.delete(curso.id_curso)
     return "Curso excluído com sucesso!"
   }
-
 }

@@ -1,37 +1,32 @@
 import { Request, Response } from "express"
-import { CursoService } from "../services/serviceCurso"
+import { RecessoService } from "../services/serviceRecesso"
 
-const service = new CursoService()
+const service = new RecessoService()
 
-export default class CursoController {
+export default class RecessoController {
   async create(request: Request, response: Response) {
-    const { descricao_curso, carga_horaria_curso, modalidade, eixo } =
-      request.body
-
+    const {descricao_recesso, data_recesso } = request.body
     const result = await service.create({
-      descricao_curso,
-      carga_horaria_curso,
-      modalidade,
-      eixo,
+        descricao_recesso,
+        data_recesso,
     })
-
     if (result instanceof Error) {
       return response.status(400).json(result.message)
     }
-    return response.status(200).json(result)
+    return response.json(result)
   }
 
   async readAll(request: Request, response: Response) {
     const result = await service.readAll()
     if (result.length < 1) {
-      return response.status(400).json("Nenhum curso cadastrado!")
+      return response.json("Nenhum recesso cadastrado!")
     }
-    return response.status(200).json(result)
+    return response.json(result)
   }
 
   async readOne(request: Request, response: Response) {
-    const { id_curso } = request.params
-    const result = await service.readOne({ id_curso })
+    const { id_recesso } = request.params
+    const result = await service.readOne({ id_recesso })
     if (result instanceof Error) {
       return response.status(404).json(result.message)
     }
@@ -39,15 +34,12 @@ export default class CursoController {
   }
 
   async update(request: Request, response: Response) {
-    const { id_curso } = request.params
-    const { descricao_curso, carga_horaria_curso, modalidade, eixo } =
-      request.body
+    const { id_recesso } = request.params
+    const { descricao_recesso, data_recesso } = request.body
     const result = await service.update({
-      id_curso,
-      descricao_curso,
-      carga_horaria_curso,
-      modalidade,
-      eixo,
+      id_recesso,
+      descricao_recesso,
+      data_recesso,
     })
     if (result instanceof Error) {
       return response.status(400).json(result.message)
@@ -56,12 +48,12 @@ export default class CursoController {
   }
 
   async delete(request: Request, response: Response) {
-    const { id_curso } = request.params
-    const result = await service.delete({ id_curso })
+    const { id_recesso } = request.params
+    const result = await service.delete({ id_recesso })
     if (result instanceof Error) {
       return response.status(400).json(result.message)
     }
     return response.status(300).json(result)
   }
-
+  
 }

@@ -1,4 +1,4 @@
-import { AppDataSource } from "../databases/connections/data-source"
+import { AppDataSource } from "../databases/connections/datasourceDev"
 import Unidade from "../databases/models/unidade"
 
 // 1) Estabelece conexão com a tabela alvo no banco de dados através de um cursor
@@ -61,7 +61,7 @@ export class UnidadeService {
   }: findOneUnidadeRequest): Promise<Unidade | Error> {
     const unidade = await cursor.findOne({ where: { id_unidade } })
     if (!unidade) {
-      return new Error("Curso não encontrado!")
+      return new Error("Unidade não encontrada!")
     }
     return unidade
   }
@@ -75,7 +75,7 @@ export class UnidadeService {
   }: updateUnidadeRequest): Promise<Unidade | Error> {
     const unidade = await cursor.findOne({ where: { id_unidade } })
     if (!unidade) {
-      return new Error("Cliente não encontrado!")
+      return new Error("Unidade não encontrada!")
     }
 
     unidade.descricao_unidade = descricao_unidade
