@@ -30,8 +30,17 @@ export default class UnidadeController {
   }
 
   async readOne(request: Request, response: Response) {
-    const { id_unidade, fk_curso } = request.params
-    const result = await service.readOne({ id_unidade, fk_curso })
+    const { id_unidade } = request.params
+    const result = await service.readOne({ id_unidade })
+    if (result instanceof Error) {
+      return response.status(404).json(result.message)
+    }
+    return response.json(result)
+  }
+
+  async readByCurso(request: Request, response: Response) {
+    const { fk_curso } = request.params
+    const result = await service.readByCurso({ fk_curso })
     if (result instanceof Error) {
       return response.status(404).json(result.message)
     }
@@ -56,8 +65,8 @@ export default class UnidadeController {
   }
 
   async delete(request: Request, response: Response) {
-    const { id_unidade, fk_curso } = request.params
-    const result = await service.delete({ id_unidade, fk_curso })
+    const { id_unidade } = request.params
+    const result = await service.delete({ id_unidade })
     if (result instanceof Error) {
       return response.status(400).json(result.message)
     }

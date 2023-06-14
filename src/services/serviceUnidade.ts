@@ -23,7 +23,9 @@ type updateUnidadeRequest = {
 }
 
 type findOneUnidadeRequest = {
-  id_unidade: string, 
+  id_unidade: string
+}
+type findByCursoRequest = {
   fk_curso: string
 }
 
@@ -57,8 +59,16 @@ export class UnidadeService {
     return unidades
   }
 
-  async readOne({ id_unidade, fk_curso }: findOneUnidadeRequest): Promise<Unidade | Error> {
-    const unidade = await cursor.findOne({ where: { id_unidade, fk_curso } })
+  async readOne({ id_unidade }: findOneUnidadeRequest): Promise<Unidade | Error> {
+    const unidade = await cursor.findOne({ where: { id_unidade } })
+    if (!unidade) {
+      return new Error("Unidade não encontrada!")
+    }
+    return unidade
+  }
+
+  async readByCurso({ fk_curso }: findByCursoRequest): Promise<Unidade | Error> {
+    const unidade = await cursor.findOne({ where: { fk_curso } })
     if (!unidade) {
       return new Error("Unidade não encontrada!")
     }
@@ -84,7 +94,6 @@ export class UnidadeService {
       ? carga_horaria_unidade
       : unidade.ordem
     unidade.ordem = ordem ? ordem : unidade.ordem
-    unidade.fk_curso = fk_curso ? fk_curso : unidade.fk_curso
 
     await cursor.save(unidade)
 
@@ -93,12 +102,12 @@ export class UnidadeService {
 
   async delete({
     id_unidade,
-  }: findOneUnidadeRequest): Promise<Unidade | Error> {
+  }: findOneUnidadeRequest): Promise<String | Error> {
     const unidade = await cursor.findOne({ where: { id_unidade } })
     if (!unidade) {
       return new Error("Unidade não encontrada!")
     }
     await cursor.delete(unidade.id_unidade)
-    return unidade
+    return "Unidade excluída com sucesso"
   }
 }

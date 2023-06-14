@@ -80,12 +80,12 @@ export class RecessoService {
 
   async delete({
     id_recesso,
-  }: findOneRecessoRequest): Promise<Recesso | Error> {
+  }: findOneRecessoRequest): Promise<String | Error> {
     const recesso = await cursor.findOne({ where: { id_recesso } })
     if (!recesso) {
       return new Error("Recesso não encontrado!")
     }
     await cursor.delete(recesso.id_recesso)
-    return recesso
+    return "Recesso excluído com sucesso!"
   }
 }
