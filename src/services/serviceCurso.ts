@@ -25,9 +25,11 @@ type updateCursoRequest = {
 type findOneCursoRequest = {
   id_curso: string
 }
+
 type findByEixoRequest = {
   eixo: string
 }
+
 type findByModalidadeRequest = {
   modalidade: string
 }
@@ -62,14 +64,6 @@ export class CursoService {
     return cursos
   }
 
-  async readOne({ id_curso }: findOneCursoRequest): Promise<Curso | Error> {
-    const curso = await cursor.findOne({ where: { id_curso } })
-    if (!curso) {
-      return new Error("Curso não encontrado!")
-    }
-    return curso
-  }
-
   async readByEixo({ eixo }: findByEixoRequest): Promise<Curso | Error> {
     const curso = await cursor.findOne({ where: { eixo } })
     if (!curso) {
@@ -80,6 +74,14 @@ export class CursoService {
 
   async readByModalidade({ modalidade }: findByModalidadeRequest): Promise<Curso | Error> {
     const curso = await cursor.findOne({ where: { modalidade } })
+    if (!curso) {
+      return new Error("Curso não encontrado!")
+    }
+    return curso
+  }
+
+  async readOne({ id_curso }: findOneCursoRequest): Promise<Curso | Error> {
+    const curso = await cursor.findOne({ where: { id_curso } })
     if (!curso) {
       return new Error("Curso não encontrado!")
     }

@@ -38,7 +38,7 @@ export default class CursoController {
     }
     return response.json(result)
   }
-  
+
   async readByTurno(request: Request, response: Response) {
     const { turno } = request.params
     const result = await service.readByTurno({ turno })

@@ -3,6 +3,7 @@ import Curso from "../models/curso"
 import Unidade from "../models/unidade"
 import Turma from "../models/turma"
 import Recesso from "../models/recesso"
+import Aula from "../models/aula"
 
 export const ProdDataSource = new DataSource({
   type: "postgres",
@@ -13,5 +14,5 @@ export const ProdDataSource = new DataSource({
   database: "cronogramas",
   synchronize: true,
   logging: true,
-  entities: [Curso, Unidade, Turma, Recesso],
+  entities: [Curso, Unidade, Turma, Recesso, Aula],
 })

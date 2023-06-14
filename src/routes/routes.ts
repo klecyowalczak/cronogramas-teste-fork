@@ -25,7 +25,7 @@ rotas.post("/turmas", new TurmaController().create)
 rotas.get("/turmas", new TurmaController().readAll)
 rotas.get("/turmas/:id_turma", new TurmaController().readOne)
 rotas.get("/turmas/turno", new TurmaController().readByTurno)
-rotas.put("/turmas/:idid_turma", new TurmaController().update)
+rotas.put("/turmas/:id_turma", new TurmaController().update)
 rotas.delete("/turmas/:id_turma", new TurmaController().delete)
 
 //Unidade

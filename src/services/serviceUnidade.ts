@@ -25,7 +25,8 @@ type updateUnidadeRequest = {
 type findOneUnidadeRequest = {
   id_unidade: string
 }
-type findByCursoRequest = {
+
+type findByCursoRequest = {  
   fk_curso: string
 }
 
@@ -80,7 +81,6 @@ export class UnidadeService {
     descricao_unidade,
     carga_horaria_unidade,
     ordem,
-    fk_curso,
   }: updateUnidadeRequest): Promise<Unidade | Error> {
     const unidade = await cursor.findOne({ where: { id_unidade } })
     if (!unidade) {
@@ -108,6 +108,6 @@ export class UnidadeService {
       return new Error("Unidade não encontrada!")
     }
     await cursor.delete(unidade.id_unidade)
-    return "Unidade excluída com sucesso"
+    return "Unidade excluída com sucesso!"
   }
 }

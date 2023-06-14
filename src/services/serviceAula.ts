@@ -58,6 +58,8 @@ export class AulaService {
         id_aula,
         data_aula,
         status_aula,
+        fk_turma,
+        fk_unidade,
     }: updateAulaRequest): Promise<Aula | Error> {
         const aula = await cursor.findOne({ where: { id_aula } })
         if (!aula) {
@@ -69,6 +71,12 @@ export class AulaService {
         aula.status_aula = status_aula 
         ? status_aula 
         : aula.status_aula
+        aula.fk_turma = fk_turma
+        ? fk_turma
+        : aula.fk_turma
+        aula.fk_unidade = fk_unidade
+        ? fk_unidade
+        : aula.fk_unidade
         }
 
     async delete({ id_aula }: findOneAulaRequest): Promise<String | Error> {
@@ -77,6 +85,6 @@ export class AulaService {
         return new Error("Aula não encontrada!")
         }
         await cursor.delete(aula.id_aula)
-        return "Aula excluída com sucesso!"
+        return "Aula não encontrada!"
     }
 }
