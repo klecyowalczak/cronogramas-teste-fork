@@ -26,6 +26,9 @@ type updateTurmaRequest = {
 
 type findOneTurmaRequest = {
     id_turma: string
+}
+
+type findByTurnoRequest = {
     turno: string
 }
 
@@ -62,8 +65,16 @@ export class TurmaService {
     return turma
   }
 
-  async readOne({ id_turma, turno }: findOneTurmaRequest): Promise<Turma | Error> {
-    const turma = await cursor.findOne({ where: { id_turma, turno } })
+  async readOne({ id_turma }: findOneTurmaRequest): Promise<Turma | Error> {
+    const turma = await cursor.findOne({ where: { id_turma } })
+    if (!turma) {
+      return new Error("Turma não encontrada!")
+    }
+    return turma
+  }
+
+  async readByTurno({ turno }: findByTurnoRequest): Promise<Turma | Error> {
+    const turma = await cursor.findOne({ where: { turno } })
     if (!turma) {
       return new Error("Turma não encontrada!")
     }
@@ -72,7 +83,6 @@ export class TurmaService {
 
   async update({
     id_turma,
-    fk_curso,
     turno,
     data_inicio,
     data_fim,
@@ -82,30 +92,27 @@ export class TurmaService {
     if (!turma) {
       return new Error("Turma não encontrada!")
     }
-
-    turma.id_turma = id_turma
-    ? id_turma
-    : turma.id_turma
-    turma.fk_curso = fk_curso
-    ? fk_curso
-    : turma.fk_curso
     turma.turno = turno
     ? turno
     : turma.turno
     turma.data_inicio = data_inicio
     ? data_inicio
     : turma.data_inicio
-    turma.data_fim = data_fim ? data_fim : turma.data_fim
-    turma.horas_aula_dia = horas_aula_dia ? horas_aula_dia : turma.horas_aula_dia
+    turma.data_fim = data_fim 
+    ? data_fim 
+    : turma.data_fim
+    turma.horas_aula_dia = horas_aula_dia 
+    ? horas_aula_dia 
+    : turma.horas_aula_dia
 }
 
-  async delete({ id_turma }: findOneTurmaRequest): Promise<Turma | Error> {
+  async delete({ id_turma }: findOneTurmaRequest): Promise<String | Error> {
     const turma = await cursor.findOne({ where: { id_turma } })
     if (!turma) {
       return new Error("Turma não encontrada!")
     }
     await cursor.delete(turma.id_turma)
-    return turma
+    return "Turma excluída com sucesso!"
   }
 }
 
